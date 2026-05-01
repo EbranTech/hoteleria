@@ -1,0 +1,272 @@
+/* ============================================================
+   SISTEMA HOTELERÍA — Estilos Globales
+   Estilo natural, sin formas decorativas, paleta neutra.
+   ============================================================ */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f2f4f6;
+    color: #2d3436;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* ---- Navbar ---- */
+nav.main-nav {
+    background: #2c3e50;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    min-height: 48px;
+    gap: 2px;
+}
+
+nav.main-nav .nav-brand {
+    color: #ecf0f1;
+    font-weight: 700;
+    font-size: 16px;
+    margin-right: 20px;
+    letter-spacing: 0.3px;
+    padding: 14px 0;
+}
+
+nav.main-nav a.nav-link {
+    color: #bdc3c7;
+    text-decoration: none;
+    padding: 14px 13px;
+    font-size: 14px;
+    display: inline-block;
+    border-bottom: 3px solid transparent;
+}
+
+nav.main-nav a.nav-link:hover {
+    color: #ecf0f1;
+    background: rgba(255,255,255,0.06);
+}
+
+nav.main-nav a.nav-link.active {
+    color: #f39c12;
+    border-bottom-color: #f39c12;
+}
+
+nav.main-nav .nav-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+nav.main-nav .nav-user {
+    color: #7f8c8d;
+    font-size: 13px;
+}
+
+nav.main-nav a.nav-logout {
+    color: #e74c3c;
+    text-decoration: none;
+    font-size: 13px;
+    padding: 6px 11px;
+    border: 1px solid rgba(231,76,60,0.4);
+}
+
+nav.main-nav a.nav-logout:hover {
+    background: rgba(231,76,60,0.15);
+}
+
+/* ---- Contenedor principal ---- */
+.page-container {
+    padding: 28px 32px;
+    max-width: 1180px;
+}
+
+h1, h2 {
+    font-weight: 600;
+    margin-bottom: 18px;
+    color: #1a252f;
+    font-size: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #dde1e7;
+}
+
+/* ---- Alertas ---- */
+.alert {
+    padding: 10px 14px;
+    font-size: 13px;
+    margin-bottom: 16px;
+    border-left: 4px solid;
+}
+.alert-error   { background: #fdf2f2; border-color: #e74c3c; color: #721c24; }
+.alert-success { background: #f4fff8; border-color: #27ae60; color: #155724; }
+.alert-warning { background: #fffbf0; border-color: #f39c12; color: #7d5a00; }
+
+/* ---- Tabla ---- */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border: 1px solid #dde1e7;
+    font-size: 14px;
+}
+
+.data-table thead {
+    background: #2c3e50;
+    color: #ecf0f1;
+}
+
+.data-table thead th {
+    padding: 11px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.data-table tbody tr {
+    border-bottom: 1px solid #eaecee;
+}
+
+.data-table tbody tr:hover {
+    background: #f7f8fa;
+}
+
+.data-table tbody td {
+    padding: 10px 14px;
+    color: #2d3436;
+}
+
+/* ---- Botones ---- */
+.btn {
+    display: inline-block;
+    padding: 7px 16px;
+    text-decoration: none;
+    font-size: 13px;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+    font-weight: 500;
+}
+
+.btn-primary   { background: #2980b9; color: #fff; }
+.btn-primary:hover { background: #2471a3; }
+
+.btn-success   { background: #27ae60; color: #fff; }
+.btn-success:hover { background: #229954; }
+
+.btn-secondary { background: #95a5a6; color: #fff; }
+.btn-secondary:hover { background: #7f8c8d; }
+
+.btn-danger-link {
+    color: #e74c3c;
+    text-decoration: none;
+    font-size: 13px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+.btn-danger-link:hover { color: #c0392b; text-decoration: underline; }
+
+/* ---- Formularios ---- */
+.form-card {
+    background: #fff;
+    padding: 28px 32px;
+    border: 1px solid #dde1e7;
+    max-width: 540px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #4a4a4a;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccd0d5;
+    background: #fff;
+    font-family: inherit;
+    font-size: 14px;
+    color: #2d3436;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #2980b9;
+}
+
+.form-actions {
+    margin-top: 22px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+/* ---- Login ---- */
+.login-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #dde1e7;
+}
+
+.login-card {
+    background: #fff;
+    padding: 40px 44px;
+    border: 1px solid #ccd0d5;
+    width: 370px;
+}
+
+.login-card .login-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 4px;
+    border: none;
+    padding: 0;
+}
+
+.login-card .login-subtitle {
+    color: #7f8c8d;
+    font-size: 13px;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eaecee;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 9px;
+    background: #2c3e50;
+    color: #fff;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.btn-login:hover {
+    background: #1a252f;
+}
+
+/* ---- Utilidades ---- */
+.mb-3 { margin-bottom: 20px; }
+.text-muted { color: #7f8c8d; font-size: 13px; }
