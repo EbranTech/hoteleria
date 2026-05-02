@@ -72,7 +72,7 @@ class ReservaController {
     }
 
     public function editar(): void {
-        requireRole(['admin']);
+        requireRole(['admin','gerente']);
         $id = (int)($_GET['id'] ?? 0);
         if ($id) {
             $reserva      = $this->modelo->getReserva($id);
@@ -87,7 +87,7 @@ class ReservaController {
     }
 
     public function update(): void {
-        requireRole(['admin']);
+        requireRole(['admin', 'gerente']);
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = (int)($_POST['id'] ?? 0);
             if ($id) {

@@ -81,7 +81,7 @@ class FacturaController {
     }
 
     public function editar(): void {
-        requireRole(['admin']);
+        requireRole(['admin','gerente','operativo']);
         $id = (int)($_GET['id'] ?? 0);
         if ($id) {
             $factura   = $this->modelo->getFactura($id);
@@ -96,7 +96,7 @@ class FacturaController {
     }
 
     public function update(): void {
-        requireRole(['admin']);
+        requireRole(['admin','gerente','operativo']);
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = (int)($_POST['id'] ?? 0);
             if ($id) {

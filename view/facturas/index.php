@@ -46,7 +46,7 @@
                         <td><?php echo $labelPago[$f['metodo_pago']] ?? $f['metodo_pago']; ?></td>
                         <td><?php echo $labelEstado[$f['estado']] ?? $f['estado']; ?></td>
                         <td>
-                            <?php if (tieneRol(['admin'])): ?>
+                            <?php if (tieneRol(['admin', 'operativo', 'gerente'])): ?>
                                 <a href="?action=factura_editar&id=<?php echo urlencode($f['id_factura']); ?>"
                                    class="btn btn-primary btn-sm">Editar</a>
                             <?php endif; ?>
