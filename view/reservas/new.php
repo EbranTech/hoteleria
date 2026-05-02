@@ -9,6 +9,12 @@
 <?php require_once __DIR__ . '/../layout/navbar.php'; ?>
 <div class="page-container">
     <h2>Nueva Reserva</h2>
+
+    <?php if (!empty($error) && $error === 'habitacion_ocupada'): ?>
+        <div class="alert alert-error" style="max-width:540px;">
+            La habitación seleccionada no está disponible. Por favor seleccione otra habitación disponible.
+        </div>
+    <?php endif; ?>
     <form action="index.php?action=reserva_create" method="POST">
 
         <div style="margin-bottom: 10px;">

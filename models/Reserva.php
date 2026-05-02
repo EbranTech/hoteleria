@@ -127,4 +127,38 @@ class ReservaModel {
         $stmt->bind_param("i", $id);
         return $stmt->execute();
     }
+
+    /**
+     * Obtiene el estado actual de una habitación.
+     * Usado para validar disponibilidad antes de crear una reserva.
+     * @param int $id
+     * @return string|null  'D'=Disponible, 'O'=Ocupada, 'M'=Mantenimiento
+     */
+    public function getEstadoHabitacion(int $id): ?string {
+        $stmt = $this->conexion->prepare(
+            "SELECT estado FROM habitaciones WHERE id_habitacion = ? LIMIT 1"
+        );
+        if (!$stmt) return null;
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $fila = $stmt->get_result()->fetch_assoc();
+        return $fila['estado'] ?? null;
+    }
+
+    /**
+     * Actualiza el estado de una habitación.
+     * Se llama al crear una reserva ('O') o al liberar la habitación.
+     * @param int $id
+     * @param string $estado  'D'|'O'|'M'
+     * @return bool
+     */
+    public function actualizarEstadoHabitacion(int $id, string $estado): bool {
+        $stmt = $this->conexion->prepare(
+            "UPDATE habitaciones SET estado = ? WHERE id_habitacion = ?"
+        );
+        if (!$stmt) return false;
+        $stmt->bind_param("si", $estado, $id);
+        return $stmt->execute();
+    }
 }
+

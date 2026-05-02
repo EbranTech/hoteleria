@@ -9,7 +9,9 @@
 <?php require_once __DIR__ . '/../layout/navbar.php'; ?>
 <div class="page-container">
     <h1>Listado de Huéspedes</h1>
+    <?php if (tieneRol(['admin'])): ?>
     <a href="?action=huesped_new" class="btn btn-primary mb-3">Nuevo Huésped</a>
+    <?php endif; ?>
 
     <table class="data-table">
         <thead>
@@ -40,7 +42,7 @@
                         <td><?php echo $h['estado'] === 'A' ? 'Activo' : 'Inactivo'; ?></td>
                         <td><?php echo htmlspecialchars($h['registrado_por'] ?? '—'); ?></td>
                         <td>
-                            <?php if (tieneRol(['admin','gerente'])): ?>
+                            <?php if (tieneRol(['admin'])): ?>
                                 <a href="?action=huesped_editar&id=<?php echo urlencode($h['id_huesped']); ?>"
                                    class="btn btn-primary btn-sm">Editar</a>
                                 <a href="?action=huesped_eliminar&id=<?php echo urlencode($h['id_huesped']); ?>"

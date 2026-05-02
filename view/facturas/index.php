@@ -9,7 +9,9 @@
 <?php require_once __DIR__ . '/../layout/navbar.php'; ?>
 <div class="page-container">
     <h1>Listado de Facturas</h1>
+    <?php if (tieneRol(['admin', 'operativo'])): ?>
     <a href="?action=factura_new" class="btn btn-primary mb-3">Nueva Factura</a>
+    <?php endif; ?>
 
     <?php
     $labelPago   = ['EF' => 'Efectivo', 'TC' => 'Tarjeta Crédito', 'TR' => 'Transferencia'];
@@ -44,13 +46,16 @@
                         <td><?php echo $labelPago[$f['metodo_pago']] ?? $f['metodo_pago']; ?></td>
                         <td><?php echo $labelEstado[$f['estado']] ?? $f['estado']; ?></td>
                         <td>
-                            <?php if (tieneRol(['admin','gerente'])): ?>
+                            <?php if (tieneRol(['admin'])): ?>
                                 <a href="?action=factura_editar&id=<?php echo urlencode($f['id_factura']); ?>"
                                    class="btn btn-primary btn-sm">Editar</a>
+                            <?php endif; ?>
+                            <?php if (tieneRol(['admin','gerente'])): ?>
                                 <a href="?action=factura_eliminar&id=<?php echo urlencode($f['id_factura']); ?>"
                                    onclick="return confirm('¿Eliminar esta factura?');"
                                    class="btn-danger-link" style="margin-left:8px;">Eliminar</a>
-                            <?php else: ?>
+                            <?php endif; ?>
+                            <?php if (!tieneRol(['admin','gerente'])): ?>
                                 <span class="text-muted">Solo lectura</span>
                             <?php endif; ?>
                         </td>

@@ -10,7 +10,9 @@
 <div class="page-container">
     <h1>Listado de Habitaciones</h1>
 
+    <?php if (tieneRol(['admin'])): ?>
     <a href="?action=habitacion_new" class="btn btn-primary mb-3">Nueva Habitación</a>
+    <?php endif; ?>
 
     <table class="data-table">
         <thead>
@@ -38,13 +40,16 @@
                         <td>Q<?php echo number_format($h['precio_noche'], 2); ?></td>
                         <td><?php echo $estados[$h['estado']] ?? $h['estado']; ?></td>
                         <td>
-                            <?php if (tieneRol(['admin','gerente'])): ?>
+                            <?php if (tieneRol(['admin'])): ?>
                                 <a href="?action=habitacion_editar&id=<?php echo urlencode($h['id_habitacion']); ?>"
                                    class="btn btn-primary btn-sm">Editar</a>
+                            <?php endif; ?>
+                            <?php if (tieneRol(['admin','gerente'])): ?>
                                 <a href="?action=habitacion_eliminar&id=<?php echo urlencode($h['id_habitacion']); ?>"
                                    onclick="return confirm('¿Eliminar esta habitación?');"
                                    class="btn-danger-link" style="margin-left:8px;">Eliminar</a>
-                            <?php else: ?>
+                            <?php endif; ?>
+                            <?php if (!tieneRol(['admin','gerente'])): ?>
                                 <span class="text-muted">Solo lectura</span>
                             <?php endif; ?>
                         </td>

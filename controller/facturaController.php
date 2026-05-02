@@ -22,14 +22,14 @@ class FacturaController {
     }
 
     public function new(): void {
-        requireRole(['admin', 'gerente', 'operativo']);
+        requireRole(['admin', 'operativo']);
         $reservas  = $this->modelo->getReservasConfirmadas();
         $huespedes = $this->modelo->getHuespedesActivos();
         require_once __DIR__ . '/../view/facturas/new.php';
     }
 
     public function create(): void {
-        requireRole(['admin', 'gerente', 'operativo']);
+        requireRole(['admin', 'operativo']);
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sesion   = getUsuarioSesion();
             $subtotal = (float)($_POST['subtotal'] ?? 0);
@@ -61,7 +61,7 @@ class FacturaController {
     }
 
     public function editar(): void {
-        requireRole(['admin', 'gerente']);
+        requireRole(['admin']);
         $id = (int)($_GET['id'] ?? 0);
         if ($id) {
             $factura   = $this->modelo->getFactura($id);
@@ -76,7 +76,7 @@ class FacturaController {
     }
 
     public function update(): void {
-        requireRole(['admin', 'gerente']);
+        requireRole(['admin']);
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = (int)($_POST['id'] ?? 0);
             if ($id) {

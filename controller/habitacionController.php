@@ -22,12 +22,12 @@ class HabitacionController {
     }
 
     public function new(): void {
-        requireRole(['admin', 'gerente', 'operativo']);
+        requireRole(['admin']);
         require_once __DIR__ . '/../view/habitaciones/new.php';
     }
 
     public function create(): void {
-        requireRole(['admin', 'gerente', 'operativo']);
+        requireRole(['admin']);
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $datos = [
                 'numero'       => trim($_POST['numero']       ?? ''),
@@ -55,7 +55,7 @@ class HabitacionController {
     }
 
     public function editar(): void {
-        requireRole(['admin', 'gerente']);
+        requireRole(['admin']);
         $id = (int)($_GET['id'] ?? 0);
         if ($id) {
             $habitacion = $this->modelo->getHabitacion($id);
@@ -68,7 +68,7 @@ class HabitacionController {
     }
 
     public function update(): void {
-        requireRole(['admin', 'gerente']);
+        requireRole(['admin']);
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = (int)($_POST['id'] ?? 0);
             if ($id) {

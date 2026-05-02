@@ -9,7 +9,9 @@
 <?php require_once __DIR__ . '/../layout/navbar.php'; ?>
 <div class="page-container">
     <h1>Listado de Reservas</h1>
+    <?php if (tieneRol(['admin', 'operativo'])): ?>
     <a href="?action=reserva_new" class="btn btn-primary mb-3">Nueva Reserva</a>
+    <?php endif; ?>
 
     <?php if (isset($_GET['msg']) && $_GET['msg'] === 'acceso_denegado'): ?>
         <div class="alert alert-warning">No tienes permiso para acceder a esa sección.</div>
@@ -41,7 +43,7 @@
                         <td>Q<?php echo number_format($r['precio_acordado'], 2); ?></td>
                         <td><?php echo $labelEstado[$r['estado']] ?? $r['estado']; ?></td>
                         <td>
-                            <?php if (tieneRol(['admin','gerente'])): ?>
+                            <?php if (tieneRol(['admin'])): ?>
                                 <a href="?action=reserva_editar&id=<?php echo urlencode($r['id_reserva']); ?>"
                                    class="btn btn-primary btn-sm">Editar</a>
                                 <a href="?action=reserva_eliminar&id=<?php echo urlencode($r['id_reserva']); ?>"
