@@ -43,7 +43,7 @@
                         <td>Q<?php echo number_format($r['precio_acordado'], 2); ?></td>
                         <td><?php echo $labelEstado[$r['estado']] ?? $r['estado']; ?></td>
                         <td>
-                            <?php if (tieneRol(['admin'])): ?>
+                            <?php if (tieneRol(['admin', 'gerente'])): ?>
                                 <a href="?action=reserva_editar&id=<?php echo urlencode($r['id_reserva']); ?>"
                                    class="btn btn-primary btn-sm">Editar</a>
                                 <a href="?action=reserva_eliminar&id=<?php echo urlencode($r['id_reserva']); ?>"
