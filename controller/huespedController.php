@@ -22,12 +22,12 @@ class HuespedController {
     }
 
     public function new(): void {
-        requireRole(['admin']);
+        requireRole(['admin', 'gerente', 'operativo']);
         require_once __DIR__ . '/../view/huespedes/new.php';
     }
 
     public function create(): void {
-        requireRole(['admin']);
+        requireRole(['admin', 'gerente', 'operativo']);
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sesion = getUsuarioSesion();
             $datos = [
@@ -56,7 +56,7 @@ class HuespedController {
     }
 
     public function editar(): void {
-        requireRole(['admin']);
+        requireRole(['admin', 'gerente']);
         $id = (int)($_GET['id'] ?? 0);
         if ($id) {
             $huesped = $this->modelo->getHuesped($id);
@@ -69,7 +69,7 @@ class HuespedController {
     }
 
     public function update(): void {
-        requireRole(['admin']);
+        requireRole(['admin', 'gerente']);
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = (int)($_POST['id'] ?? 0);
             if ($id) {
@@ -100,7 +100,7 @@ class HuespedController {
     }
 
     public function eliminar(): void {
-        requireRole(['admin']);
+        requireRole(['admin', 'gerente']);
         $id = (int)($_GET['id'] ?? 0);
         if ($id) {
             $ok = $this->modelo->eliminarHuesped($id);

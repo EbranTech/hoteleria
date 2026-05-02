@@ -44,13 +44,7 @@
         </div>
 
         <div style="margin-bottom: 10px;">
-            <label for="subtotal">Subtotal (Q):</label><br>
-            <input type="number" id="subtotal" name="subtotal" value="<?php echo htmlspecialchars($factura['subtotal']); ?>" step="0.01" min="0" required>
-        </div>
-
-        <div style="margin-bottom: 10px;">
-            <label for="impuesto">Impuesto (Q):</label><br>
-            <input type="number" id="impuesto" name="impuesto" value="<?php echo htmlspecialchars($factura['impuesto']); ?>" step="0.01" min="0">
+            <p style="color: #555; font-style: italic;">* El total (Q <?php echo htmlspecialchars($factura['total']); ?>) se recalculará automáticamente basado en la reserva.</p>
         </div>
 
         <div style="margin-bottom: 10px;">

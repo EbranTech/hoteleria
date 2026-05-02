@@ -41,13 +41,7 @@
         </div>
 
         <div style="margin-bottom: 10px;">
-            <label for="subtotal">Subtotal (Q):</label><br>
-            <input type="number" id="subtotal" name="subtotal" step="0.01" min="0" required>
-        </div>
-
-        <div style="margin-bottom: 10px;">
-            <label for="impuesto">Impuesto (Q):</label><br>
-            <input type="number" id="impuesto" name="impuesto" step="0.01" min="0" value="0">
+            <p style="color: #555; font-style: italic;">* El subtotal, impuesto y total se calcularán automáticamente basados en la reserva seleccionada.</p>
         </div>
 
         <div style="margin-bottom: 10px;">

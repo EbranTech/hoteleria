@@ -3,6 +3,7 @@ require_once __DIR__ . '/../models/Factura.php';
 require_once __DIR__ . '/../models/Bitacora.php';
 require_once __DIR__ . '/../models/conexion.php';
 require_once __DIR__ . '/../helpers/session.php';
+require_once __DIR__ . '/../models/Reserva.php';
 
 class FacturaController {
     private $modelo;
@@ -32,15 +33,34 @@ class FacturaController {
         requireRole(['admin', 'operativo']);
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sesion   = getUsuarioSesion();
-            $subtotal = (float)($_POST['subtotal'] ?? 0);
-            $impuesto = (float)($_POST['impuesto'] ?? 0);
+            
+            $id_reserva = trim($_POST['id_reserva'] ?? '');
+            
+            // Automatic Calculation
+            $con = new Conexion();
+            $conexion = $con->conectar();
+            $reservaModel = new ReservaModel($conexion);
+            $reserva = $reservaModel->getReserva((int)$id_reserva);
+            
+            $total = 0.00;
+            if ($reserva) {
+                $d1 = new DateTime($reserva['fecha_entrada']);
+                $d2 = new DateTime($reserva['fecha_salida']);
+                $dias = $d1->diff($d2)->days;
+                if ($dias == 0) $dias = 1;
+                $total = $dias * (float)$reserva['precio_acordado'];
+            }
+            
+            $subtotal = $total;
+            $impuesto = 0.00;
+
             $datos = [
-                'id_reserva'  => trim($_POST['id_reserva']  ?? ''),
+                'id_reserva'  => $id_reserva,
                 'id_huesped'  => trim($_POST['id_huesped']  ?? ''),
                 'num_factura' => trim($_POST['num_factura'] ?? ''),
                 'subtotal'    => $subtotal,
                 'impuesto'    => $impuesto,
-                'total'       => $subtotal + $impuesto,
+                'total'       => $total,
                 'metodo_pago' => trim($_POST['metodo_pago'] ?? 'EF'),
                 'estado'      => trim($_POST['estado']      ?? 'P'),
                 'id_usuario'  => $sesion['id'],
@@ -80,15 +100,33 @@ class FacturaController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = (int)($_POST['id'] ?? 0);
             if ($id) {
-                $subtotal = (float)($_POST['subtotal'] ?? 0);
-                $impuesto = (float)($_POST['impuesto'] ?? 0);
+                $id_reserva = trim($_POST['id_reserva'] ?? '');
+                
+                // Automatic Calculation
+                $con = new Conexion();
+                $conexion = $con->conectar();
+                $reservaModel = new ReservaModel($conexion);
+                $reserva = $reservaModel->getReserva((int)$id_reserva);
+                
+                $total = 0.00;
+                if ($reserva) {
+                    $d1 = new DateTime($reserva['fecha_entrada']);
+                    $d2 = new DateTime($reserva['fecha_salida']);
+                    $dias = $d1->diff($d2)->days;
+                    if ($dias == 0) $dias = 1;
+                    $total = $dias * (float)$reserva['precio_acordado'];
+                }
+                
+                $subtotal = $total;
+                $impuesto = 0.00;
+
                 $datos = [
-                    'id_reserva'  => trim($_POST['id_reserva']  ?? ''),
+                    'id_reserva'  => $id_reserva,
                     'id_huesped'  => trim($_POST['id_huesped']  ?? ''),
                     'num_factura' => trim($_POST['num_factura'] ?? ''),
                     'subtotal'    => $subtotal,
                     'impuesto'    => $impuesto,
-                    'total'       => $subtotal + $impuesto,
+                    'total'       => $total,
                     'metodo_pago' => trim($_POST['metodo_pago'] ?? 'EF'),
                     'estado'      => trim($_POST['estado']      ?? 'P'),
                 ];
